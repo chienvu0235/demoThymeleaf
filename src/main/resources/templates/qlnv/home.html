@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" th:href="@{/assets/bootstrap/bootstraps/css/bootstrap.min.css}">
+  <link rel="stylesheet" th:href="@{/assets/font/Dosis/static/Dosis-Bold.ttf}">
+  <link rel="stylesheet"
+        th:href="@{/assets/fontawesome/fontawesome-free-6.5.2-web/css/all.min.css}">
+  <link rel="stylesheet" th:href="@{/assets/css/style.css}">
+</head>
+<body>
+<div class="header">
+  <div class="header_tops">
+    <h2 class="title">
+      Quản lý nhân sự
+    </h2>
+  </div>
+  <div class="header_right">
+    <i class="fa-solid fa-bars"></i>
+    <div>
+      <i class="fa-solid fa-comments"></i>
+      <i class="fa-solid fa-bell"></i>
+      <i class="fa-solid fa-user"></i>
+      <i class="fa-solid fa-gear"></i>
+    </div>
+  </div>
+</div>
+<div class="containers">
+  <div class="container_left">
+
+    <div class="container_left_bottom">
+      <div class="list_menu_title">
+
+        <p class="list_name homepage">TRANG CHỦ</p>
+      </div>
+      <div class="list_title">
+        <p>QUẢN LÝ</p>
+      </div>
+      <div class="list_menu nv">
+
+        <div class="list_tag">
+          <i id="icon_list" class="fa-solid fa-user"></i>
+          <div class="list_item">
+            <p class="list_name">Nhân viên</p>
+          </div>
+        </div>
+      </div>
+      <div class="list_menu">
+        <div class="list_tag">
+          <i id="icon_list" class="fa-solid fa-building"></i>
+          <p class="list_name">Tổ chức </p>
+        </div>
+      </div>
+      <div class="list_menu">
+        <div class="list_tag">
+          <i id="icon_list" class="fa-solid fa-building"></i>
+          <p class="list_name">Thuế - Bảo hiểm </p>
+        </div>
+        <i id="icon_list_left" class="fa-solid fa-chevron-left"></i>
+      </div>
+      <div class="list_menu">
+        <div class="list_tag">
+          <i id="icon_list" class="fa-solid fa-briefcase"></i>
+          <p class="list_name">Công việc</p></div>
+      </div>
+      <div class="list_menu">
+        <div class="list_tag">
+          <i id="icon_list" class="fa-solid fa-graduation-cap"></i>
+          <p class="list_name">Đào tạo </p></div>
+        <i id="icon_list_left" class="fa-solid fa-chevron-left"></i>
+      </div>
+      <div class="list_menu">
+        <div class="list_tag">
+          <i id="icon_list" class="fa-solid fa-pen-to-square"></i>
+          <p class="list_name">Hiệu suất</p>
+        </div>
+      </div>
+      <div class="list_menu">
+        <div class="list_tag">
+          <i id="icon_list" class="fa-solid fa-bars-progress"></i>
+          <p class="list_name">Quản lý dự án </p>
+        </div>
+        <i id="icon_list_left" class="fa-solid fa-chevron-left"></i>
+      </div>
+      <div class="list_menu">
+        <div class="list_tag">
+          <i id="icon_list" class="fa-solid fa-money-bill"></i>
+          <p class="list_name">Tài chính </p>
+        </div>
+      </div>
+      <div class="list_footer">
+        <p class="list_footer_title">THỐNG KÊ - BÁO CÁO</p>
+      </div>
+      <div class="list_menu">
+        <div class="list_tag">
+          <i id="icon_list" class="fa-solid fa-money-bill"></i>
+          <p class="list_name">Thống kê Doanh thu </p>
+        </div>
+      </div>
+      <div class="list_menu">
+        <div class="list_tag">
+          <i id="icon_list" class="fa-solid fa-chart-line"></i>
+          <p class="list_name">Thống kế lương </p>
+        </div>
+      </div>
+      <div class="list_menu">
+        <div class="list_tag">
+          <i id="icon_list" class="fa-solid fa-gift"></i>
+          <p class="list_name">Khen thưởng - Kỉ luật </p>
+        </div>
+      </div>
+    </div>
+    <div class="container_left_footer">
+    </div>
+  </div>
+  <div class="containers_ right">
+    <div class="header_top mt-3">
+      <h2>Danh sách nhân viên</h2>
+      <button id="btn_new" type="button" class="btn btn-info">+ THÊM MỚI</button>
+    </div>
+    <div class="search-bar mt-5" style="display: flex">
+      <input
+          type="text"
+          class="form-control"
+          id="keyword_search"
+          placeholder="Enter your keyword..."
+      />
+      <i id="button_search" class="fa-solid fa-magnifying-glass"></i>
+    </div>
+    <div class="form_table mt-3">
+      <table class="table table-dark table-striped">
+        <thead>
+        <tr>
+          <th scope="col">#STT</th>
+          <th scope="col">ID</th>
+          <th scope="col">Họ và Tên</th>
+          <th scope="col">Giới tính</th>
+          <th scope="col">Điện thoại</th>
+          <th scope="col">Email</th>
+          <th scope="col">Bộ Phận</th>
+          <th scope="col">Chức vụ</th>
+          <th scope="col">Thao tác</th>
+        </tr>
+        </thead>
+        <tbody id="table">
+        </tbody>
+      </table>
+
+      <div class="paginations">
+        <nav aria-label="Page navigation example">
+          <ul class="pagination">
+            <li class="page-item">
+              <a class="page-link" href="#" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+              </a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item">
+              <a class="page-link" href="#" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+
+    // Check va refer
+    <form id="employeeForm" action="/employees" method="POST" th:object="${employee}">
+      <div class="modal" id="modal_create" style="display: none;">
+
+        <div class="modal_new_container">
+          <div>
+            <i class="fa-solid fa-address-card"></i>
+            <h2 class="modal_new_title">Thêm nhân viên</h2>
+          </div>
+          <!--          <form>-->
+          <div class="form_new">
+            <div class="checkid" style="position: relative;">
+
+              <!--                <input-->
+              <!--                    type="text"-->
+              <!--                    class="form-control mt-3"-->
+              <!--                    id="id"-->
+              <!--                    th:field="*{id}"-->
+              <!--                    placeholder="ID*">-->
+              <span id="error_id"
+                    style="color: red; font-size: 12px; position: absolute; margin-left: 32px;"></span>
+            </div>
+            <input
+                type="text"
+                class="form-control mt-3"
+                id="name"
+                th:field="*{name}"
+                placeholder="Họ và Tên">
+          </div>
+          <div class="form_new">
+            <select id="gender" th:field="*{gender}"
+                    class="form-select mt-3" aria-label="Default select example">
+              <option th:value='selected'>Giới tính</option>
+              <option th:value="M">Nam</option>
+              <option th:value="F">Nữ</option>
+            </select>
+            <input
+                type="text"
+                class="form-control mt-3"
+                id="phone"
+                th:field="*{phoneNumber}"
+                placeholder="Điện thoại">
+          </div>
+          <div class="form_new">
+            <input
+                type="text"
+                class="form-control mt-3"
+                id="email"
+                th:field="*{email}"
+                placeholder="Email">
+          </div>
+          <div class="form_new">
+            <input
+                type="text"
+                class="form-control mt-3"
+                id="section"
+                th:field="*{department}"
+                placeholder="Bộ phận">
+            <select id="roleId" th:field="*{roleId}" class="form-select mt-3"
+                    aria-label="Default select example">
+              <option th:value='0'>Chức vụ</option>
+              <option th:value="1">Trưởng phòng</option>
+              <option th:value="2">Phó phòng</option>
+              <option th:value="3">Nhân viên</option>
+              <option th:value="4">Thực tập</option>
+            </select>
+          </div>
+          <div class="btn_create">
+            <button id="create" type="submit" class="btn btn-primary">Lưu</button>
+          </div>
+          <button id="escape1" type="button" class="btn btn-danger">X</button>
+          <!--          </form>-->
+        </div>
+      </div>
+    </form>
+
+    <div class="modal" id="modal_update" style="display: none;">
+
+      <div class="modal_new_container">
+        <div>
+          <i class="fa-solid fa-user-pen"></i>
+          <h2 class="modal_new_title">Sửa thông tin</h2>
+        </div>
+        <div class="form_new">
+          <input
+              type="text"
+              class="form-control mt-3"
+              id="id_update"
+              readonly
+              disabled
+              placeholder="ID*">
+          <input
+              type="text"
+              class="form-control mt-3"
+              id="name_update"
+              placeholder="Họ và Tên">
+        </div>
+        <div class="form_new">
+          <select id="gender_update" class="form-select mt-3" aria-label="Default select example">
+            <option selected>Giới tính</option>
+            <option value="M">Nam</option>
+            <option value="F">Nữ</option>
+          </select>
+          <input
+              type="text"
+              class="form-control mt-3"
+              id="phone_update"
+              placeholder="Điện thoại">
+        </div>
+        <div class="form_new">
+          <input
+              type="text"
+              class="form-control mt-3"
+              id="email_update"
+              placeholder="Email">
+        </div>
+        <div class="form_new">
+          <input
+              type="text"
+              class="form-control mt-3"
+              id="office_update"
+              placeholder="Bộ phận">
+          <select id="section_update" class="form-select mt-3" aria-label="Default select example">
+            <option selected>Chức vụ</option>
+            <option value="1">Trưởng phòng</option>
+            <option value="2">Phó phòng</option>
+            <option value="3">Nhân viên</option>
+            <option value="4">Thực tập</option>
+          </select>
+        </div>
+        <div class="btn_create">
+          <button id="btn_update" type="button" class="btn btn-primary">Lưu</button>
+        </div>
+        <button id="escape2" type="button" class="btn btn-danger">X</button>
+      </div>
+    </div>
+
+    <div class="modal delete" style="display: none;">
+      <div class="modal_delete">
+        <div id="modal_tilte">
+          <h2 class="modal_title_notify">
+            Xác nhận xóa nhân viên
+          </h2>
+        </div>
+        <div class="modal_descestion">
+          <p class="modal_notify_describe">Bạn có thực sự muốn xóa nhân viên này</p>
+        </div>
+        <div class="btn_notify_delete">
+          <button id="btn_notify_cancel" type="button" class="btn btn-light">Hủy</button>
+          <button id="btn_notify_delete" type="button" class="btn btn-danger">Xóa</button>
+        </div>
+        <i id="btn_tocancel" class="fa-solid fa-x"></i>
+      </div>
+    </div>
+
+
+  </div>
+</div>
+<script th:src="@{/assets/js/jquery.min.js}"></script>
+<script th:src="@{/assets/js/script.js}"></script>
+</body>
+</html>
