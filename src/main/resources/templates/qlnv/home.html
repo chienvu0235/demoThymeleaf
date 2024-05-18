@@ -205,7 +205,7 @@
               <option th:value="F">Nữ</option>
             </select>
             <input
-                type="text"
+                type="tel"
                 class="form-control mt-3"
                 id="phone"
                 th:field="*{phoneNumber}"
@@ -213,7 +213,7 @@
           </div>
           <div class="form_new">
             <input
-                type="text"
+                type="email"
                 class="form-control mt-3"
                 id="email"
                 th:field="*{email}"
@@ -272,14 +272,14 @@
             <option value="F">Nữ</option>
           </select>
           <input
-              type="text"
+              type="tel"
               class="form-control mt-3"
               id="phone_update"
               placeholder="Điện thoại">
         </div>
         <div class="form_new">
           <input
-              type="text"
+              type="email"
               class="form-control mt-3"
               id="email_update"
               placeholder="Email">
@@ -322,8 +322,6 @@
         <i id="btn_tocancel" class="fa-solid fa-x"></i>
       </div>
     </div>
-
-
   </div>
 </div>
 <script th:src="@{/assets/js/jquery.min.js}"></script>

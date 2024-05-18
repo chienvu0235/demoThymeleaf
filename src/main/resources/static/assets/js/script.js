@@ -1,9 +1,7 @@
 //let listAgent = JSON.parse(localStorage.getItem('listAgent')) ?? [];
 let listAgent = [];
 
-
 document.addEventListener('DOMContentLoaded', () => {
-//  const params = { 'page': 0, 'size': 0};
   sendAjaxRequest('/employees', 'GET')
     .then(data => {
       listAgent = data.content;
@@ -44,7 +42,7 @@ const $modalUpdate = document.getElementById('modal_update');
 
 
 $btnNew.onclick = () => {
-    $modalCreate.style.display = 'flex';
+  $modalCreate.style.display = 'flex';
 }
 const $table = document.getElementById('table');
 
@@ -62,46 +60,44 @@ function convertDtoToLabel(agent) {
 }
 
 const renderAgent = (agents = listAgent) => {
-    if (!Array.isArray(agents)) {
-        return;
-    }
-    let rowAgent = '';
-    for(let agent of agents ) {
-      agent.idLabel = agent.id;
-      agent.nameLabel = agent.name;
-      agent.genderLabel = parseInt(agent.gender) === 'M' ? 'Nam' : 'Nữ';
-      agent.phoneLabel = agent.phoneNumber;
-      agent.emailLabel = agent.email;
-      agent.officeLabel = agent.department;
-      agent.roleLabel = convertIdToRole(agent.roleId);
+  if (!Array.isArray(agents)) {
+    return;
+  }
+  let rowAgent = '';
+  for(let agent of agents ) {
+    agent.idLabel = agent.id;
+    agent.nameLabel = agent.name;
+    agent.genderLabel = parseInt(agent.gender) === 'M' ? 'Nam' : 'Nữ';
+    agent.phoneLabel = agent.phoneNumber;
+    agent.emailLabel = agent.email;
+    agent.officeLabel = agent.department;
+    agent.roleLabel = convertIdToRole(agent.roleId);
 
-//        agent = convertDtoToLabel(agent);
-
-        rowAgent += `
-        <tr >
-            <th class="th_stt" scope="row"></th>
-            <td>${agent.idLabel}</td>
-            <td>${agent.nameLabel}</td>
-            <td>${agent.genderLabel}</td>
-            <td>${agent.phoneLabel}</td>
-            <td>${agent.emailLabel}</td>
-            <td>${agent.officeLabel}</td>
-            <td>${agent.roleLabel}</td>
-            <td>
-                <button class="btn btn-success" ><i class="fa-solid fa-pen-to-square" onClick="updateAgent(${agent.id})" ></i></button>
-                <button class="btn btn-danger"><i class="fa-solid fa-trash" onClick="deleteAgent(${agent.id})"></i></button>
-            </td>
-        </tr>
-        `;
-    }
-    $table.innerHTML = rowAgent;
-    sinhSTT();
+      rowAgent += `
+      <tr >
+        <th class="th_stt" scope="row"></th>
+        <td>${agent.idLabel}</td>
+        <td>${agent.nameLabel}</td>
+        <td>${agent.genderLabel}</td>
+        <td>${agent.phoneLabel}</td>
+        <td>${agent.emailLabel}</td>
+        <td>${agent.officeLabel}</td>
+        <td>${agent.roleLabel}</td>
+        <td>
+          <button class="btn btn-success" ><i class="fa-solid fa-pen-to-square" onClick="updateAgent(${agent.id})" ></i></button>
+          <button class="btn btn-danger"><i class="fa-solid fa-trash" onClick="deleteAgent(${agent.id})"></i></button>
+        </td>
+      </tr>
+      `;
+  }
+  $table.innerHTML = rowAgent;
+  sinhSTT();
 }
 
 function sinhSTT() {
-    $('.th_stt').each(function(key, value) {
-        $(this).text(key+1);
-    });
+  $('.th_stt').each(function(key, value) {
+    $(this).text(key+1);
+  });
 }
 // create
 const clearInput = () =>{
@@ -114,103 +110,65 @@ const clearInput = () =>{
     $office.value ='Chức vụ';
 }
 
-
-
-//$btnCreate.onclick = () => {
-//  var formData = $(this).serialize();
-//    const id = $id.value;
-//    const name = $name.value;
-//    const gender = $gender.value;
-//    const phone = $phone.value;
-//    const email = $email.value;
-//    const section = $section.value;
-//    const office = $office.value;
-//
-//    for (let agent of listAgent) {
-//        if (agent.id === id){
-//            document.getElementById('error_id').innerHTML = 'Id đã tồn tại';
-//            return;
-//        }
-//    }
-//
-//    const newAgent = {
-//        id,
-//        name,
-//        gender,
-//        phone,
-//        email,
-//        section,
-//        office,
-//    }
-//
-//    listAgent.push(newAgent);
-//    renderAgent();
-//    sinhSTT();
-//    clearInput();
-//    localStorage.setItem('listAgent', JSON.stringify(listAgent));
-//    $modalCreate.style.display = 'none';
-//
-//}
-
 $btnEscape1.onclick = () => {
-    $modalCreate.style.display = 'none';
+  $modalCreate.style.display = 'none';
 }
 // Update
 
 const updateAgent = (idAgent) => {
-    $modalUpdate.style.display = 'flex';
-    let index = -1;
-    for(let i = 0; i < listAgent.length; i++) {
-        if (listAgent[i].id == idAgent ){
-            index = i;
-        }
+  $modalUpdate.style.display = 'flex';
+  let index = -1;
+  for(let i = 0; i < listAgent.length; i++) {
+    if (listAgent[i].id == idAgent ){
+        index = i;
     }
-    let val = listAgent[index];
-    $idUpdate.value = val.id;
-    $nameUpdate.value = val.name;
-    $genderUpdate.value = val.gender;
-    $phoneUpdate.value = val.phoneNumber;
-    $emailUpdate.value = val.email;
-    $sectionUpdate.value = val.roleId;
-    $officeUpdate.value = val.department;
+  }
+  let val = listAgent[index];
+  $idUpdate.value = val.id;
+  $nameUpdate.value = val.name;
+  $genderUpdate.value = val.gender;
+  $phoneUpdate.value = val.phoneNumber;
+  $emailUpdate.value = val.email;
+  $sectionUpdate.value = val.roleId;
+  $officeUpdate.value = val.department;
 }
 
 $btnUpdate.onclick = () => {
-    const stt = '';
-    const id = $idUpdate.value;
-    const name = $nameUpdate.value;
-    const gender = $genderUpdate.value;
-    const phone = $phoneUpdate.value;
-    const email = $emailUpdate.value;
-    const section = $sectionUpdate.value;
-    const office = $officeUpdate.value;
+  const stt = '';
+  const id = $idUpdate.value;
+  const name = $nameUpdate.value;
+  const gender = $genderUpdate.value;
+  const phone = $phoneUpdate.value;
+  const email = $emailUpdate.value;
+  const section = $sectionUpdate.value;
+  const office = $officeUpdate.value;
 
-    const agentUpdate = {
-        stt,
-        id,
-        name,
-        gender,
-        phone,
-        email,
-        section,
-        office,
-    }
+  const agentUpdate = {
+    stt,
+    id,
+    name,
+    gender,
+    phone,
+    email,
+    section,
+    office,
+  }
 
-    let index = -1;
-    for (let i  = 0; i < listAgent.length; i++) {
-        if (listAgent[i].id == id) {
-            index = i;
-        }   
+  let index = -1;
+  for (let i  = 0; i < listAgent.length; i++) {
+    if (listAgent[i].id == id) {
+      index = i;
     }
-    listAgent[index] = agentUpdate;
-    renderAgent();
-    $idUpdate.disabled = false;
-    $modalUpdate.style.display = 'none';
-    sinhSTT();
-    localStorage.setItem('listAgent', JSON.stringify(listAgent));
+  }
+  listAgent[index] = agentUpdate;
+  renderAgent();
+  $idUpdate.disabled = false;
+  $modalUpdate.style.display = 'none';
+  sinhSTT();
+  localStorage.setItem('listAgent', JSON.stringify(listAgent));
 }
 $btnEscape2.onclick = () => {
-    $modalUpdate.style.display = 'none';
+  $modalUpdate.style.display = 'none';
 }
 
 const deleteAgent = (idAgent) => {
@@ -229,93 +187,64 @@ const deleteAgent = (idAgent) => {
     })
 }
 
-
-
 // search
 const $keyWordSearch = document.getElementById('keyword_search');
 $keyWordSearch.oninput = () =>
 {
-    const keywordSearch = $keyWordSearch.value;
-    let result = listAgent.filter((agent) =>
-    agent.name.toLowerCase().includes(keywordSearch.toLowerCase()));
-    sinhSTT();
-    renderAgent(result);
+  const keywordSearch = $keyWordSearch.value;
+  let result = listAgent.filter((agent) =>
+  agent.name.toLowerCase().includes(keywordSearch.toLowerCase()));
+  sinhSTT();
+  renderAgent(result);
 }
 renderAgent();
-
-
-//function apiFetch(url, method = 'GET', data = null) {
-//  url = 'http://localhost:8008' + url;
-//  const options = {
-//    method: method,
-//    headers: {
-//        'Content-Type': 'application/json'
-//    }
-//  };
-//
-//  if (data) {
-//    options.body = JSON.stringify(data);
-//  }
-//
-//  return fetch(url, options)
-//    .then(response => {
-//      if (!response.ok) {
-//          throw new Error('Network response was not ok ' + response.statusText);
-//      }
-//      return response.json();
-//    })
-//    .catch(error => {
-//      console.error('There was a problem with the fetch operation:', error);
-//      throw error;
-//    });
-//}
 
 function convertIdToRole(roleId) {
   let role = '';
   switch (parseInt(roleId)) {
     case 1:
-        role = 'Trưởng phòng';
-        break;
+      role = 'Trưởng phòng';
+      break;
     case 2:
-        role = 'Phó phòng';
-        break;
+      role = 'Phó phòng';
+      break;
     case 3:
-        role = 'Nhân viên';
-        break;
+      role = 'Nhân viên';
+      break;
     case 4:
-        role = 'Thực tập';
-        break;
+      role = 'Thực tập';
+      break;
     default:
-        role = 'Unknown';
-        break;
+      role = 'Unknown';
+      break;
   }
   return role;
 }
 
 // Add new employee
 $(document).ready(function() {
-    $('#employeeForm').submit(function(e) {
-        e.preventDefault(); // Prevent form submission
+  $('#employeeForm').submit(function(e) {
+    e.preventDefault(); // Prevent form submission
 
-        // Serialize form data
-        var formData = $(this).serialize();
+    // Serialize form data
+    var formData = $(this).serialize();
 
-        // Send AJAX POST request to the API endpoint
-        $.ajax({
-            type: 'POST',
-            url: '/employees',
-            data: formData,
-            success: function(response) {
-                listAgent.push(response);
-                renderAgent(listAgent);
-            },
-            error: function(xhr, status, error) {
-                // Handle error
-                console.error(error);
-                $('#result').html('An error occurred while adding the employee.');
-            }
-        });
+    // Send AJAX POST request to the API endpoint
+    $.ajax({
+      type: 'POST',
+      url: '/employees',
+      data: formData,
+      success: function(response) {
+        listAgent.push(response);
+        renderAgent(listAgent);
+      },
+      error: function(xhr, status, error) {
+        // Handle error
+        console.error(error);
+        $('#result').html('An error occurred while adding the employee.');
+      }
     });
+  });
 });
 
 // UPDATE AN EMPLOYEE
@@ -358,14 +287,14 @@ $("#btn_update").click(function() {
   sendAjaxRequest("/employees", "PUT", employeeDto)
   .then(response => {
     for (let i = 0; i < listAgent.length; i++) {
-        if (listAgent[i].id == response.id) {
-          listAgent[i].name = response.name;
-          listAgent[i].gender = response.gender;
-          listAgent[i].phoneNumber = response.phoneNumber;
-          listAgent[i].email = response.email;
-          listAgent[i].department = response.department;
-          listAgent[i].roleId = response.roleId;
-        }
+      if (listAgent[i].id == response.id) {
+        listAgent[i].name = response.name;
+        listAgent[i].gender = response.gender;
+        listAgent[i].phoneNumber = response.phoneNumber;
+        listAgent[i].email = response.email;
+        listAgent[i].department = response.department;
+        listAgent[i].roleId = response.roleId;
+      }
       };
     renderAgent(listAgent);
   });
@@ -401,4 +330,16 @@ async function sendAjaxRequest(url, method, data, params) {
   } catch (error) {
     console.error('Error:', error);
   }
+}
+
+document.getElementById('name_input').addEventListener('input', function() {
+  const nameInput = document.getElementById('name_input');
+  const capitalizedValue = capitalizeWords(nameInput.value);
+  nameInput.value = capitalizedValue;
+});
+
+function capitalizeWords(str) {
+  return str.replace(/\b\w/g, function(char) {
+    return char.toUpperCase();
+  });
 }
