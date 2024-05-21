@@ -1,7 +1,6 @@
 package com.example.resource_management.service.impl;
 
-import com.example.resource_management.model.Role;
-import com.example.resource_management.repository.RoleRepository;
+import com.example.resource_management.security.secure.entity.Role;
 import com.example.resource_management.service.RoleService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -11,10 +10,10 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class RoleServiceImpl implements RoleService {
 
-  private final RoleRepository roleRepository;
+//  private final RoleRepository roleRepository;
 
   @Override
   public List<Role> getAllRoles() {
-    return roleRepository.findAllByOrderByIdAsc();
+    return null;
   }
 }
