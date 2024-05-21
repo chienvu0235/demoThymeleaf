@@ -25,10 +25,8 @@ public class UserInit implements CommandLineRunner {
 
   @Override
   public void run(String... args) throws Exception {
-    System.out.println("HEELO");
-    User user = new User();
-    user.setUserName("admin");
-    user.setPassWord(new BCryptPasswordEncoder().encode("123456"));
+    User user = User.builder().userName("admin")
+        .passWord(new BCryptPasswordEncoder().encode("123456")).enabled(true).build();
     userRepository.save(user);
 
     Role role = new Role();
@@ -38,10 +36,7 @@ public class UserInit implements CommandLineRunner {
     UserRole userRole = new UserRole();
     userRole.setUser(user);
     userRole.setRole(role);
-
     userRoleRepository.save(userRole);
-
-    System.out.println("HEELO2");
 
   }
 }

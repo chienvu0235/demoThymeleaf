@@ -31,7 +31,6 @@ public class EmployeeController {
     return ResponseEntity.ok(employeeService.getAll(PageRequest.of(page, size)));
   }
 
-
   @PostMapping
   public ResponseEntity<EmployeeDto> addEmployee(@ModelAttribute EmployeeDto employee) {
     EmployeeDto employeeDto = Converter.convertToEmployeeDto(employeeService.create(employee));
